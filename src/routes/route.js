@@ -66,19 +66,55 @@ router.get('/candidates/:canidatesName', function(req, res){
 
 router.get("/movies", function(req, res){
     let movies = ["Rang de basanti","The shining","Lord of the rings","Batman begins"]
-console.log(movies)
     res.send(  { movies }  );
 });
 
 
 router.get("/movies/:indexNumber", function(req, res){
     let movies = ["Rang de basanti","The shining","Lord of the rings","Batman begins"]
+  let i =req.params.indexNumber
+let findeMovie;
+if ((i - 1)<movies.length){
+    findeMovie=movies[i - 1]
+}else{
+    findeMovie="use a valid index " + movies.length
+}
   
-let index = movies.findIndex()
-  
-console.log(index)
-    res.send(  { Done }  );
+
+    res.send(findeMovie );
 });
 
+  const mArr =  [ {
+        id: 1,
+        name: "The Shining"
+       }, {
+        id: 2,
+        name: "Incendies"
+       }, {
+        id: 3,
+        name: "Rang de Basanti"
+       }, {
+        id: 4,
+        name: "Finding Nemo"
+       }]
+       router.get("/films/", function(req, res){     
+
+    res.send( mArr);
+});
+
+
+router.get("/films/:filmId", function(req, res){     
+
+    let i = req.params.filmId
+    let findFilm;
+    if ((i -1)<mArr.length){
+        findFilm=mArr[i-1]
+    }else{
+        findFilm="No movie exists with this id"+i
+    }
+    res.send( findFilm);
+});
+
+    
 module.exports = router;
 // adding this comment for no reason
