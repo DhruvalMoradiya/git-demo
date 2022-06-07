@@ -34,7 +34,7 @@ const getParticularBooks= async function (req, res) {
     let getObj = req.body
 
     let particularBook = await BookModel.find(getObj)
-    res.send({msg: book})
+    res.send({msg:particularBook })
 
 }
 
