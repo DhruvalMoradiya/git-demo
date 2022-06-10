@@ -1,20 +1,13 @@
 const express = require('express');
+const { route } = require('express/lib/application');
 const router = express.Router();
 
-const authorController= require("../controllers/authorController")
-const bookController= require("../controllers/bookController")
-const publishercontroller= require("../controllers/publishercontroller")
+router.get("/tes-api" , function (req,res){
+    res.send("hey")
+})
 
-router.post("/createAuthor", authorController.createAuthor  )
-
-router.post("/createBook", bookController.createBook  )
-
-router.post("/createPublisher", publishercontroller.createPublisher  )
-
-router.get("/fetchAllData", bookController.fetchAllData)
-
-router.put('/updateBook',bookController.updateBook)
-
-router.put('/BooksUpdatePrice',bookController.BooksUpdatePrice)
+router.get("/tes-api2" , function (req,res){
+    res.send("Hello")
+})
 
 module.exports = router;
