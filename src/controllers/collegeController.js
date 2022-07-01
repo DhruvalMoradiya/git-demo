@@ -14,7 +14,7 @@ try{
 
     if (typeof name !== "string")return res.status(400).send({ status: false, msg: " Please enter  name as a String" });
 
-    if (!/^\w[a-zA-Z.\s]*$/.test(name))return res.status(400).send({ status: false, msg: "The  name may contain only letters" });
+    if (!/^\w[a-zA-Z.\_]*$/.test(name))return res.status(400).send({ status: false, msg: "The  name may contain only letters" });
 
     if (!fullName)return res.status(400).send({status:false,msg:"fullName is missing"})
 
@@ -30,7 +30,16 @@ try{
 
     let uniqueName = await collegeModel.findOne({ name: name })
 
+    let uniquefullName = await collegeModel.findOne({ fullName: fullName })
+
+    let uniquelogoLink = await collegeModel.findOne({ logoLink: logoLink })
+
+
     if (uniqueName) return res.status(400).send({ status: false, msg: "This name already exists" })
+
+    if (uniquefullName) return res.status(400).send({ status: false, msg: "This fullName already exists" })
+
+    if (uniquelogoLink) return res.status(400).send({ status: false, msg: "This logoLink already exists" })
 
     let saveData=await collegeModel.create(req.body)
     return res.status(201).send({status:true,msg:"College is created Successfully",data:saveData,})
@@ -47,19 +56,17 @@ const getCollegeDetail = async function (req,res) {
     try {
         let query =req.query;
       
-        if(Object.keys(query).length === 0) return res.status(400).send({status:false,msg:"pls Enter Query"})
+        if(Object.keys(query).length === 0) return res.status(400).send({status:false,msg:"pls Enter Name"})
 
-        if(!(Object.keys(query).includes("collegeName"))) return res.status(400).send({status:false,msg:`You cant find this Query`})
+        if(!(Object.keys(query).includes("collegeName"))) return res.status(400).send({status:false,msg:`You cant find this Name`})
 
         query.collegeName = query.collegeName.toLowerCase() 
 
         let collegeDetail = await collegeModel.findOne({name:query.collegeName});
 
-        if(!collegeDetail)  return res.status(404).send({status:false,msg:`${query.collegeName} is not present .`})
+        if(!collegeDetail)  return res.status(404).send({status:false,msg:`${query.collegeName} College  is not present .`})
 
         let intern = await internModel.find({collegeId:collegeDetail._id,isDeleted:false}).select({name:1,email:1,mobile:1});
-
-        if(intern.length === 0)  return res.status(404).send({status:false,msg:"intern is not found ."})
 
         let {name,fullName,logoLink} = collegeDetail
 
