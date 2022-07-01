@@ -20,7 +20,7 @@ try{
 
     if (typeof fullName !== "string")return res.status(400).send({ status: false, msg: " Please enter  fullName as a String" });
 
-    if (!/^\w[a-zA-Z.\s]*$/.test(fullName))return res.status(400).send({ status: false, msg: "The  fullName may contain only letters" });
+    if (!/^\w[a-zA-Z.,\s]*$/.test(fullName))return res.status(400).send({ status: false, msg: "The  fullName may contain only letters" });
 
     if (!logoLink) return res.status(400).send({status:false,msg:"please enter logo link"})
 
