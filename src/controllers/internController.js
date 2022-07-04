@@ -6,6 +6,7 @@ const validator = require('validator')
 // CREATE INTERN
 
 const createIntern = async function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin","*")
     try {
         let { name, email, mobile, collegeName } = req.body
 
