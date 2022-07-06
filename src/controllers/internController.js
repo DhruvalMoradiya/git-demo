@@ -1,6 +1,6 @@
 const internModel = require('../models/internModel')
 const collegeModel = require('../models/collegeModel')
-const validator = require('validator')
+//const validator = require('validator')
 
 
 // CREATE INTERN
@@ -22,7 +22,9 @@ const createIntern = async function (req, res) {
 
         if (typeof email !== "string") return res.status(400).send({ status: false, msg: " Please enter  email as a String" });
 
-        if (!validator.isEmail(email)) return res.status(400).send({ status: false, msg: "Entered email is invalid" });
+        if (!/^([0-9a-z]([-\\.][0-9a-z]+))@([a-z]([-\\.][a-z]+))[\\.]([a-z]{2,9})+$/.test(email))return res.status(400).send({ status: false, msg: "Entered email is invalid" });
+
+        //if (!validator.isEmail(email)) return res.status(400).send({ status: false, msg: "Entered email is invalid" });
 
         if (!mobile) return res.status(400).send({ status: false, msg: "please enter mobile" })
 
