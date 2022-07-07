@@ -81,6 +81,7 @@ const createBook = async function (req, res) {
             return res.status(400).send({ status: false, message: `Release date must be in "YYYY-MM-DD" format` })
         }
         //validations ends
+        console.log(releasedAt)
 
         let books = { title, excerpt, userId, ISBN, category, subcategory, releasedAt }
         let bookCreated = await BookModel.create(books)
@@ -93,4 +94,19 @@ const createBook = async function (req, res) {
 };
 
 
+const deleteBook = async function (req,res){
+    try{
+        let bookId = req.params.bookId;
+
+        let book = await bookModel.findOne({_id:bookId,isDeleted:false})
+        if (!book){return res.status(404).send({status:false,message:"book does not exist"})}
+
+        await reviewModel.updateMany({_id:bookId,isDeleted:false},{$set:{isDeleted:true}})
+
+        return res.status(200).send({status:true,message:"Book deleted successfully"})
+
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+}
+}
 module.exports.createBook = createBook
