@@ -37,7 +37,7 @@ const createBook = async function (req, res) {
         if (!isValid(title)) {
             res.status(400).send({ status: false, message: "title field is required" })
         }
-        if (!/^\w[a-zA-Z.\s]*$/.test(title)) return res.status(400).send({ status: false, message: "The title must contain only letters" });
+        // if (!/^\w[a-zA-Z.\s]*$/.test(title)) return res.status(400).send({ status: false, message: "The title must contain only letters" });
 
         const isTitleAlreadyExist = await bookModel.findOne({ title: title })
         if (isTitleAlreadyExist) {
