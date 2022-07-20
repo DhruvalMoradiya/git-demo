@@ -17,7 +17,7 @@ const {isValid} = require('../validation/validation.js')
             return res.status(400).send({status:false, message:"Please give the valide  URL"})
           }
 
-        const urlCode = shortId.generate();
+        const urlCode = shortId.generate().toLowerCase();
  
         const baseUrl = "http://localhost:3000/"
         const shortUrl = baseUrl + urlCode // http://localhost:3000/dosfiwo
