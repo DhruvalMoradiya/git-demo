@@ -143,8 +143,8 @@ const userLogin = async (req, res) => {
 
         if (!isValid(password)) return res.status(400).send({ status: false, message: "please enter your password" })
 
-        const isEmailExists = await userModel.findOne({ email: email })
-        if (!isEmailExists) return res.status(401).send({ status: false, message: "Email is Incorrect" })
+        // const isEmailExists = await userModel.findOne({ email: email })
+        // if (!isEmailExists) return res.status(401).send({ status: false, message: "Email is Incorrect" })
 
         if (!passwordRegex.test(password))
             return res.status(400).send({
