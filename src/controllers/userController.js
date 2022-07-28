@@ -254,7 +254,7 @@ const updateUserProfile = async function (req, res) {
     if ("address" in body) {
       const address = JSON.parse(body.address);
       body.address = address;
-      // console.log(body.address);
+
       const shipping = body.address.shipping;
       if (shipping) {
         if (shipping.pincode) {
@@ -269,8 +269,7 @@ const updateUserProfile = async function (req, res) {
       }
     }
     let result = { fname, lname, email, phone, password, profileImage }
-    // console.log(result)
-    // let update = await userModel.findOneAndUpdate({ _id: user }, result, { new: true})
+
     if (body.address) {
         result.address = {}
       const shipping = body.address.shipping;
@@ -284,7 +283,7 @@ const updateUserProfile = async function (req, res) {
         if (shipping.city) {
           result.address.shipping.city = shipping.city;
         }
-        // console.log(result);
+        
         if (shipping.pincode) {
           result.address.shipping.pincode = shipping.pincode;
         }
