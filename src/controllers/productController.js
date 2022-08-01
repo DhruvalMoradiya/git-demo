@@ -230,8 +230,6 @@ const getproductDetails = async function (req, res) {
     }
 }
 
-
-
 const deleteProduct = async function (req, res) {
     try {
 
@@ -316,6 +314,7 @@ const updateProduct=async function(req,res){
         return res.status(500).send({ status: false, message:err.message})
     }
 }
+
 
 
 module.exports = { createProduct, getProduct, getproductDetails, deleteProduct,updateProduct }
