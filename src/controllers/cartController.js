@@ -77,10 +77,11 @@ const updateCart = async function (req, res) {
         let userId = req.params.userId
 
         let { cartId, productId, removeProduct } = body
-        removeProduct=Number(removeProduct)
+        removeProduct = Number(removeProduct)
         if (!isValidBody(body)) return res.status(400).send({ status: false, message: "Body should not be empty" })
         let findUser = await userModel.findById({ _id: userId })
         if (!findUser) return res.status(400).send({ status: false, message: "User not found" })
+        
         if (!ObjectId.isValid(cartId)) return res.status(400).send({ status: false, message: "card Id is invalid" })
         const findCart = await cartModel.findOne({ _id: cartId })
         if (!findCart) return res.status(400).send({ status: false, message: "Cart id not exist" })
@@ -107,7 +108,6 @@ const updateCart = async function (req, res) {
         } return res.status(404).send({ status: false, message: "prodeuct not found" })
 
     } catch (err) {
-        console.log(err);
         return res.status(500).send({ status: false, message: "There is an error inside of the code" })
     }
 }
