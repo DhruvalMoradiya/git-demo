@@ -7,7 +7,7 @@ const multer = require('multer')
 
 app.use(bodyParser.json());
 app.use(multer().any())
-// app.use(bodyParser.urlencoded({ extended: true }));
+
 
 
 let url = "mongodb+srv://Birappa:MangoDB@cluster0.m5phg.mongodb.net/group69Database"
